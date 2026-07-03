@@ -90,19 +90,10 @@ class Logic:
     def rem(self):
         if len(self.data2) <= 1:
             return 1
-        # Find and remove the last entry of whichever type was added last
-        # Work backwards through merged rows to find the last non-empty cell
         for i in range(len(self.data2) - 1, 0, -1):
             row = self.data2[i]
             if row[0] != "" or row[2] != "":
-                # Clear whichever side was filled last
-                # We track this by checking which side has the "later" entry —
-                # since entries are added sequentially, pop the last raw entry instead
                 break
-        # Simpler: pop last raw entry from a shadow list approach —
-        # instead, just find the last row with any content and blank the
-        # side that was most recently added (we can't know without a log,
-        # so blank the LAST non-empty side scanning right-to-left)
         for i in range(len(self.data2) - 1, 0, -1):
             row = self.data2[i]
             if row[2] != "":          # cash side — remove it
